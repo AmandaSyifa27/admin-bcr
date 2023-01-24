@@ -1,0 +1,66 @@
+/* ADD CAR */
+.addcar {
+  display: grid;
+  background-color: #f7f6fa;
+  grid-template-areas:
+    "sidebar sidebar2 header header"
+    "sidebar sidebar2 content content";
+  height: 100%;
+}
+
+/* SIDEBAR */
+.sidebar {
+  grid-area: sidebar;
+}
+
+/* SIDEBAR2 */
+.sidebar2 {
+  grid-area: sidebar2;
+}
+
+/* CONTENT */
+.content {
+  grid-area: content;
+}
+.addcar-feature h3 {
+  font-weight: 700;
+  margin-bottom: 16px;
+}
+.navig {
+  display: inline-flex;
+}
+.navig p {
+  margin-right: 10px;
+  font-weight: 700;
+}
+.navig a {
+  text-decoration: none;
+  color: black;
+}
+.navig p:nth-child(5) {
+  font-weight: 300 !important;
+  color: #222 !important;
+}
+.addcar-form {
+  background-color: white;
+  padding: 16px;
+  width: 1100px;
+}
+.addcar-form form {
+  font-size: 12px;
+  color: #3c3c3c;
+}
+.forms div {
+  margin-bottom: 16px;
+}
+.addcar-form label {
+  width: 147px;
+  margin-right: 8px;
+}
+.addcar-form input,
+.form-category select {
+  padding: 9px 12px;
+  border-radius: 2px;
+  width: 339px;
+  border: 1px solid #3c3c3c;
+}

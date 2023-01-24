@@ -1,0 +1,6 @@
+.signin {
+    display: flex
+    ;
+    background-image: url('../assets/SigninImg.png');
+    height: 100vh;
+}
