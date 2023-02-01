@@ -27,6 +27,22 @@ const APIOrder = {
     const response = await axiosInstance.get("/v2/car");
     return response;
   },
+  postCar: async (formData) => {
+    const response = await axiosInstance.post("/car", formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response;
+  },
+  deleteCar: async (id) => {
+    const response = await axiosInstance.delete(`/car/${id}`);
+    return response;
+  },
+  editcar: async (id) => {
+    const response = await axiosInstance.put(`/car/${id}`);
+    return response;
+  },
 };
 
 export default APIOrder;

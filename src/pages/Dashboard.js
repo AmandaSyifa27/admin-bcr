@@ -1,17 +1,14 @@
 import React, { useState } from "react";
-import { Form, FormControl, Nav } from "react-bootstrap";
-import Container from "react-bootstrap/Container";
-import Navbar from "react-bootstrap/Navbar";
 import { Link } from "react-router-dom";
 import dashboardImg from "../assets/DashboardImg.png";
 import carsImg from "../assets/CarsImg.png";
-import "../styles/DashboardStyle.css";
-import adminInit from "../assets/AdminInit.png";
+import "../styles/Dashboard.css";
 import { DatePicker } from "antd";
 import { BarElement, CategoryScale, Chart as ChartJs, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import APIOrder from "../apis/APIOrder";
 import { Bar } from "react-chartjs-2";
 import OrdersTable from "../components/OrdersTable";
+import Header from "../components/Header";
 
 ChartJs.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title);
 
@@ -100,27 +97,8 @@ const Dashboard = () => {
           </div>
         </div>
       </div>
-      <div className="sementara">
-        <div className="header">
-          <Navbar variant="light" bg="white">
-            <Container className="container-header">
-              <Nav>
-                <Form className="d-flex">
-                  <FormControl type="search" placeholder="Search" className="nav-form" aria-label="Search" />
-                  <button type="submit">Search</button>
-                </Form>
-                <img src={adminInit} alt="adminaccount" />
-                <select className="nav-select">
-                  <option disabled>Unis Badri</option>
-                  <option>
-                    <Link to="/sign-in">Log Out</Link>
-                  </option>
-                </select>
-              </Nav>
-            </Container>
-          </Navbar>
-        </div>
-
+      <div className="content1">
+        <Header />
         <div className="content">
           <div className="barchart">
             <div className="navigation">
@@ -145,11 +123,11 @@ const Dashboard = () => {
               <div className="barchart-main">
                 {Object.values(data).length > 0 ? (
                   <>
-                    <div>
+                    <div className="diagram">
                       <div className="barchart-main1">
                         <p>Amount of Car Rented</p>
                       </div>
-                      <Bar style={{ width: "1025px" }} options={options} data={data} />
+                      <Bar options={options} data={data} />
                       {""}
                     </div>
                     <p>Date</p>

@@ -1,15 +1,17 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import dashboardImg from "../assets/DashboardImg.png";
 import carsImg from "../assets/CarsImg.png";
-import "../styles/ListCars.css";
-// import { getCarsList } from "../apis/APIOrder";
-import CarCards from "../components/CarCards";
+import "../styles/AddCar.css";
 import Header from "../components/Header";
+import EditCarForm from "../components/EditCarForm.js";
+import APIOrder from "../apis/APIOrder.js";
 
-const ListCars = () => {
+const EditCar = () => {
+  const params = useParams();
+
   return (
-    <div className="listcars" role="listcars">
+    <div className="editcar d-flex flex-direction-row " role="editcar" style={{ background: "#f7f6fa" }}>
       <div className="sidebar">
         <div className="sidebar-logo">
           <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -49,29 +51,20 @@ const ListCars = () => {
       <div className="content1">
         <Header />
         <div className="content">
-          <div className="listcar-content">
-            <div className="listcar-features">
-              <div className="navigation">
+          <div className="addcar-content">
+            <div className="addcar-feature">
+              <div className="navig">
                 <p>Cars</p>
                 <p>&gt;</p>
-                <p>List Car</p>
-              </div>
-              <div className="feature">
-                <h3>List Car</h3>
-                <Link to="/add-car">
-                  <button>
-                    <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
-                      <path d="M9 3.75V14.25" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                      <path d="M3.75 9H14.25" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                    Add New Car
-                  </button>
+                <Link to="/list-cars">
+                  <p>List Car</p>
                 </Link>
+                <p>&gt;</p>
+                <p>Edit car</p>
               </div>
+              <h3>Edit car</h3>
             </div>
-            <div className="car-cards">
-              <CarCards />
-            </div>
+            <EditCarForm />
           </div>
         </div>
       </div>
@@ -79,4 +72,4 @@ const ListCars = () => {
   );
 };
 
-export default ListCars;
+export default EditCar;

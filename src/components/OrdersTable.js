@@ -44,38 +44,64 @@ function OrdersTable() {
     {
       title: "User Email",
       dataIndex: "User",
-      key: "email",
+      key: "id",
       render: (user, __, idx) => <p key={idx}>{user.email}</p>,
+      sorter: {
+        compare: (a, b) => a.user - b.user,
+        multiple: 6,
+      },
     },
+
     {
       title: "Car",
       dataIndex: "car",
-      key: "car",
+      key: "id",
       render: (val, __, idx) => <p key={idx}>{val || "-"}</p>,
+      sorter: {
+        compare: (a, b) => a.val - b.val,
+        multiple: 5,
+      },
     },
+
     {
       title: "Start Rent",
       dataIndex: "start_rent_at",
-      key: "Start",
+      key: "id",
       render: (val, __, idx) => <p key={idx}>{convertUTCtoLocal(val)}</p>,
+      sorter: {
+        compare: (a, b) => a.val - b.val,
+        multiple: 4,
+      },
     },
     {
       title: "Finish Rent",
       dataIndex: "finish_rent_at",
-      key: "Finish",
+      key: "id",
       render: (val, __, idx) => <p key={idx}>{convertUTCtoLocal(val)}</p>,
+      sorter: {
+        compare: (a, b) => a.val - b.val,
+        multiple: 3,
+      },
     },
     {
       title: "Price",
       dataIndex: "total_price",
-      key: "Price",
+      key: "id",
       render: (val, __, idx) => <p key={idx}>{convertNumbertoLocalCurrency(val)}</p>,
+      sorter: {
+        compare: (a, b) => a.val - b.val,
+        multiple: 2,
+      },
     },
     {
       title: "Status Order",
       dataIndex: "status",
-      key: "Status",
+      key: "id",
       render: (val, __, idx) => <p key={idx}>{val ? "Selesai" : "Masih Disewa"}</p>,
+      sorter: {
+        compare: (a, b) => a.val - b.val,
+        multiple: 1,
+      },
     },
   ];
 
@@ -83,15 +109,17 @@ function OrdersTable() {
     <div>
       {data ? (
         <Table
+          style={{ width: "1100px", textAlign: "center" }}
           columns={columns}
           dataSource={data.orders}
           pagination={{
             defaultCurrent: data.page,
             pageSize: data.pageSize,
             total: data.count,
-            onChange: (page, pS) => {
+            onChange: (page, pS, sorter) => {
               setCurrentPage(page);
               setPageSize(pS);
+              console.log(sorter);
             },
           }}
         />

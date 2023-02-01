@@ -1,19 +1,49 @@
 import SigninImage from "../assets/SigninImg.png";
-import React from "react";
+import React, { useState } from "react";
 import "../styles/SigninStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import APIAuth from "../apis/APIAuth";
+import { Alert } from "react-bootstrap";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
+  const [alert, setAlert] = useState(false);
+  const [alertFail, setAlertFail] = useState(false);
+
+  // if (alert) {
+  //   return (
+  //     <Alert
+  //       style={{ width: "500px", float: "right" }}
+  //       show={alert}
+  //       variant="success"
+  //       onClose={() => setAlert(false)}
+  //       dismissible
+  //     >
+  //       <p>Successfully logged in</p>
+  //     </Alert>
+  //   );
+  // }
+  // if (alertFail) {
+  //   return (
+  //     <Alert
+  //       style={{ width: "500px", float: "right" }}
+  //       show={alertFail}
+  //       variant="danger"
+  //       onClose={() => setAlertFail(false)}
+  //       dismissible
+  //     >
+  //       <small>Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital.</small>
+  //     </Alert>
+  //   );
+  // }
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
     try {
       await APIAuth.login(Object.fromEntries(formData));
-      alert("logged!");
+      setAlert(true);
       let returnTo = "/";
       const params = new URLSearchParams(search);
       const redirectTo = params.get("return_To");
@@ -21,8 +51,10 @@ const SignIn = () => {
       setTimeout(() => {
         navigate(returnTo);
       }, 3000);
+      // navigate(returnTo);
     } catch (error) {
-      alert(error.massage);
+      setAlertFail(true);
+      return null;
     }
   };
 
@@ -42,6 +74,24 @@ const SignIn = () => {
           <label>Password</label>
           <input type="password" name="password" placeholder="6+ karakter" />
           <button type="submit">Sign In</button>
+          <Alert
+            style={{ width: "500px", float: "right" }}
+            show={alertFail}
+            variant="danger"
+            onClose={() => setAlertFail(false)}
+            dismissible
+          >
+            <small>Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital.</small>
+          </Alert>
+          <Alert
+            style={{ width: "500px", float: "right" }}
+            show={alert}
+            variant="success"
+            onClose={() => setAlert(false)}
+            dismissible
+          >
+            <small>Successfully logged in</small>
+          </Alert>
         </form>
       </div>
     </div>

@@ -8,8 +8,8 @@ const APIAuth = {
         email,
         password,
       });
-      Auth.storeUserInfoToCookies(response.data.acces_token);
-      // Auth.getAccesToken(response.headers);
+      console.log({ response });
+      Auth.storeUserInfoToCookies(response.data.access_token);
       return response.data;
     } catch (error) {
       throw new Error(error);
