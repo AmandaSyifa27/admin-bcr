@@ -1,8 +1,7 @@
-.group-card {
+.card-group {
   display: flex;
   flex-wrap: wrap;
-  width: 1101px;
-  justify-content: space-between;
+  gap: 24px;
 }
 .buttons button {
   background-color: white;
@@ -13,7 +12,6 @@
   box-shadow: 0px 0px 4px rgb(0 0 0 / 15%);
   border-radius: 8px;
   background-color: white;
-  margin-bottom: 24px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;

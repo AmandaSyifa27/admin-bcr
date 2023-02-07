@@ -17,8 +17,8 @@
 .sidebar {
   display: flex;
   flex-direction: column;
-  width: fit-content;
   background-color: #0d28a6;
+  min-width: 70px;
   padding-top: 18px;
 }
 .sidebar-logo {
@@ -38,6 +38,7 @@
   padding-left: 9px;
   background: rgba(255, 255, 255, 0.3);
   font-weight: 700;
+  width: -webkit-fill-available;
 }
 .sidebar-menu a {
   display: flex;

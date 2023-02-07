@@ -8,7 +8,6 @@ const APIAuth = {
         email,
         password,
       });
-      console.log({ response });
       Auth.storeUserInfoToCookies(response.data.access_token);
       return response.data;
     } catch (error) {

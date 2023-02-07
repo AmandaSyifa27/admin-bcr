@@ -45,7 +45,7 @@
 
 /* SIDEBAR2 */
 .sidebar2 {
-  width: 220px;
+  min-width: 220px;
   background-color: white;
   padding-top: 18px;
 }

@@ -109,7 +109,7 @@ function OrdersTable() {
     <div>
       {data ? (
         <Table
-          style={{ width: "1100px", textAlign: "center" }}
+          style={{ width: "97%", textAlign: "center" }}
           columns={columns}
           dataSource={data.orders}
           pagination={{
@@ -119,7 +119,6 @@ function OrdersTable() {
             onChange: (page, pS, sorter) => {
               setCurrentPage(page);
               setPageSize(pS);
-              console.log(sorter);
             },
           }}
         />

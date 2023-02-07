@@ -9,6 +9,8 @@ import APIOrder from "../apis/APIOrder";
 import { Bar } from "react-chartjs-2";
 import OrdersTable from "../components/OrdersTable";
 import Header from "../components/Header";
+import Sidebar1 from "../components/Sidebar1.js";
+import Sidebar2 from "../components/Sidebar2.js";
 
 ChartJs.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title);
 

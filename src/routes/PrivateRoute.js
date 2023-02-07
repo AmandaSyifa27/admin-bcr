@@ -1,6 +1,7 @@
 import React from "react";
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import Auth from "../utils/Auth";
+import Layout from "../components/Layout.js";
 
 function PrivateRoute() {
   const location = useLocation();

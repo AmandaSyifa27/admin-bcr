@@ -4,11 +4,13 @@ import "../styles/SigninStyle.css";
 import { useLocation, useNavigate } from "react-router-dom";
 import APIAuth from "../apis/APIAuth";
 import { Alert } from "react-bootstrap";
+import Logo from "../assets/Logo.png";
+import SigninImg from "../assets/SigninImg.png";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
-  const [alert, setAlert] = useState(false);
+  // const [alert, setAlert] = useState(false);
   const [alertFail, setAlertFail] = useState(false);
 
   // if (alert) {
@@ -43,7 +45,7 @@ const SignIn = () => {
     const formData = new FormData(e.target);
     try {
       await APIAuth.login(Object.fromEntries(formData));
-      setAlert(true);
+      // setAlert(true);
       let returnTo = "/";
       const params = new URLSearchParams(search);
       const redirectTo = params.get("return_To");
@@ -59,23 +61,18 @@ const SignIn = () => {
   };
 
   return (
-    <div className="signin">
-      {/* <div className='signin-img'>
-            <img src={SigninImage} alt='SigninImg' />
-        </div> */}
-      <div className="signin-form">
-        <svg width="100" height="34" viewBox="0 0 100 34" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <rect width="100" height="34" fill="#CFD4ED" />
-        </svg>
-        <h2>Welcome, Admin BCR</h2>
-        <form onSubmit={handleSubmit}>
-          <label>Email</label>
-          <input type="email" name="email" placeholder="Contoh: johndee@gmail.com" />
-          <label>Password</label>
-          <input type="password" name="password" placeholder="6+ karakter" />
-          <button type="submit">Sign In</button>
+    <div className="container-signin" data-testid="signin-test">
+      <div className="div-form"></div>
+      <div className="div-text">
+        <div className="signBox">
+          <div className="logo">
+            <img src={Logo} alt="" className="rectangle" />
+          </div>
+          <div className="header">
+            <h1>Welcome, Admin BCR</h1>
+          </div>
           <Alert
-            style={{ width: "500px", float: "right" }}
+            style={{ width: "auto", float: "right" }}
             show={alertFail}
             variant="danger"
             onClose={() => setAlertFail(false)}
@@ -83,16 +80,22 @@ const SignIn = () => {
           >
             <small>Masukkan username dan password yang benar. Perhatikan penggunaan huruf kapital.</small>
           </Alert>
-          <Alert
-            style={{ width: "500px", float: "right" }}
-            show={alert}
-            variant="success"
-            onClose={() => setAlert(false)}
-            dismissible
-          >
-            <small>Successfully logged in</small>
-          </Alert>
-        </form>
+          <div className="login">
+            <form onSubmit={handleSubmit}>
+              <div className=" input login-email">
+                <label>Email</label>
+                <input className="inpt" type="email" name="email" placeholder="Contoh: johndee@gmail.com" />
+              </div>
+              <div className=" input login-pass">
+                <label>Password</label>
+                <input className="inpt" type="password" name="password" placeholder="6+ karakter" />
+              </div>
+              <button className="sign-in" type="submit">
+                Sign In
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </div>
   );

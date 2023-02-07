@@ -6,6 +6,8 @@ import "../styles/ListCars.css";
 // import { getCarsList } from "../apis/APIOrder";
 import CarCards from "../components/CarCards";
 import Header from "../components/Header";
+import Sidebar1 from "../components/Sidebar1.js";
+import Sidebar2 from "../components/Sidebar2.js";
 
 const ListCars = () => {
   return (

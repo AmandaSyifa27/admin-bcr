@@ -6,6 +6,8 @@ import "../styles/ListCars.css";
 import dashboard from "../assets/DashboardImg.png";
 import CarCards from "../components/CarCards.js";
 import { Link } from "react-router-dom";
+import dashboardImg from "../assets/DashboardImg.png";
+import carsImg from "../assets/CarsImg.png";
 
 const { Header, Sider, Content } = Layout;
 const Dummy = () => {
@@ -23,20 +25,49 @@ const Dummy = () => {
           theme="light"
           mode="inline"
           defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <UserOutlined />,
-              label: "Dashboard",
-            },
-            {
-              key: "2",
-              // icon: <VideoCameraOutlined />,
-              icon: <img src={dashboard} alt="dashboadr" />,
-              label: "List Cars",
-            },
-          ]}
-        />
+          // items={[
+          //   {
+          //     key: "1",
+          //     icon: <UserOutlined />,
+          //     label: "Dashboard",
+          //   },
+          //   {
+          //     key: "2",
+          //     // icon: <VideoCameraOutlined />,
+          //     icon: <img src={dashboard} alt="dashboadr" />,
+          //     label: "List Cars",
+          //   },
+          // ]}
+        >
+          <div className="bar-samping d-flex ">
+            <div className="sb-1">
+              <div className="sidebar-menu">
+                <div className="dashboard-menu">
+                  <Link to="/">
+                    <img src={dashboardImg} alt="dashboardimg" />
+                    <p>Dashboard</p>
+                  </Link>
+                </div>
+                <div>
+                  <Link to="/list-cars">
+                    <img src={carsImg} alt="carsimg" />
+                    <p>List Cars</p>
+                  </Link>
+                </div>
+              </div>
+            </div>
+            <div className="sb-2">
+              <div className="sidebar2-p">
+                <div>
+                  <h5>DASHBOARD</h5>
+                </div>
+                <div className="sidebar2-name">
+                  <h5>Dashboard</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+        </Menu>
       </Sider>
       <Layout className="site-layout">
         <Header

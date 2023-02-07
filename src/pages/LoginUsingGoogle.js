@@ -8,7 +8,6 @@ const LoginUsingGoogle = () => {
       <GoogleLogin
         onSuccess={(credentialResponse) => {
           alert(JSON.stringify(credentialResponse));
-          console.log(credentialResponse);
         }}
         onError={(err) => {
           alert(JSON.stringify(err));

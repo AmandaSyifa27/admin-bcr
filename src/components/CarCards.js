@@ -9,16 +9,8 @@ import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody } from "react-bootstrap";
 import DeleteModal from "../assets/DeleteModal.png";
 import "../styles/DeleteButton.css";
-import { ToastContainer, toast } from "react-toastify";
-import { Link } from "react-router-dom";
-
-// button !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-// import React, { useState } from "react";
-// import { DeleteOutlined } from "@ant-design/icons";
-// import { Alert, Modal, ModalBody } from "react-bootstrap";
-// import DeleteModal from "../assets/DeleteModal.png";
-// import { toast } from "react-toastify";
-// import { ToastContainer } from "react-toastify";
+import { Link, useLocation } from "react-router-dom";
+import { message } from "antd";
 
 export function convertToLocalCurrrency(number) {
   if (!number) return null;
@@ -33,66 +25,10 @@ export function convertToLocalTime(utc) {
   return formatter.format(date);
 }
 
-const CarCards = () => {
-  const [cars, setCars] = useState([]);
-  // const [filters, setFilters] = useState(null);
-  const [isActive, setIsActive] = useState(false);
-  const [modalOpen, setModalOpen] = useState(false);
-  // const [alertOpen, setAlertOpen] = useState(false);
-
-  const navigate = useNavigate();
-
-  const small = cars.filter((car) => car.category === "small");
-  const medium = cars.filter((car) => car.category === "medium");
-  const large = cars.filter((car) => car.category === "large");
-
-  function showAll() {
-    return cars();
-  }
-  function showSmall() {
-    setCars(small);
-    setIsActive(isActive);
-  }
-  function showMedium() {
-    setCars(medium);
-    setIsActive(isActive);
-  }
-  function showLarge() {
-    setCars(large);
-    setIsActive(isActive);
-  }
-
-  React.useEffect(() => {
-    APIOrder.getCarsList().then((res) => {
-      setCars(res.data.cars);
-      console.log({ res });
-    });
-  }, []);
-
-  const onDelete = async (id) => {
-    setModalOpen(true);
-    try {
-      await APIOrder.deleteCar(id);
-      alert("did");
-    } catch (error) {
-      alert("failed");
-    }
-  };
-  const onCancel = () => {
-    setModalOpen(false);
-  };
-  const onYes = async (id) => {
-    // try {
-    //   await APIOrder.deleteCar(id);
-    //   alert("did");
-    // } catch (error) {
-    //   alert("failed");
-    // }
-    setModalOpen(false);
-  };
-
-  const Cards = () => {
-    return cars.map((car) => {
+const Cards = ({ cars, filterByCategory, onDelete }) => {
+  return cars
+    .filter((car) => (filterByCategory ? car.category === filterByCategory : !!car))
+    .map((car) => {
       return (
         <div style={{ padding: "24px" }} className="car-card" key={car.id}>
           <div className="car-image">
@@ -133,53 +69,107 @@ const CarCards = () => {
         </div>
       );
     });
+};
+
+const CarCards = () => {
+  const [cars, setCars] = useState([]);
+  const [filterByCategory, setFilterByCategory] = useState("");
+  const [isActive, setIsActive] = useState(false);
+  const [modalOpen, setModalOpen] = useState(false);
+  const [carIdForDelete, setCarIdForDelete] = useState("");
+  const [messageApi, contextHolder] = message.useMessage();
+  const location = useLocation();
+  // console.log(location);
+
+  // const { car, payload } = location.state;
+
+  function showAll() {
+    setFilterByCategory("");
+  }
+  function showSmall() {
+    setFilterByCategory("small");
+    setIsActive(isActive);
+  }
+  function showMedium() {
+    setFilterByCategory("medium");
+    setIsActive(isActive);
+  }
+  function showLarge() {
+    setFilterByCategory("large");
+    setIsActive(isActive);
+  }
+
+  React.useEffect(() => {
+    APIOrder.getCarsList().then((res) => {
+      setCars(res.data.cars);
+      console.log(res.data);
+    });
+  }, []);
+
+  const onDelete = (id) => {
+    setModalOpen(true);
+    setCarIdForDelete(id);
+  };
+  const onCancel = () => {
+    setModalOpen(false);
+    setCarIdForDelete("");
+  };
+  const onYes = async () => {
+    try {
+      await APIOrder.deleteCar(carIdForDelete);
+      message.success("Data Berhasil Dihapus");
+    } catch (error) {
+      alert("failed");
+    }
+    setModalOpen(false);
   };
 
   return (
-    <div className="CarCards">
-      <div className="buttons">
-        <button className={isActive ? "active-button" : null} onClick={showAll}>
-          All
-        </button>
-        <button className={isActive ? "active-button" : null} onClick={showSmall}>
-          2 - 4 people
-        </button>
-        <button className={isActive ? "active-button" : null} onClick={showMedium}>
-          4 - 6 people
-        </button>
-        <button className={isActive ? "active-button" : null} onClick={showLarge}>
-          6 - 8 people
-        </button>
+    <>
+      {contextHolder}
+      <div className="CarCards">
+        <div className="buttons">
+          <button className={isActive ? "active-button" : null} onClick={showAll}>
+            All
+          </button>
+          <button className={isActive ? "active-button" : null} onClick={showSmall}>
+            2 - 4 people
+          </button>
+          <button className={isActive ? "active-button" : null} onClick={showMedium}>
+            4 - 6 people
+          </button>
+          <button className={isActive ? "active-button" : null} onClick={showLarge}>
+            6 - 8 people
+          </button>
+        </div>
+        <div key="id" className="card-group">
+          <Cards cars={cars} filterByCategory={filterByCategory} onDelete={onDelete} />
+        </div>
+        <Modal className="modal" show={modalOpen} animation={true} centered>
+          <ModalBody className="modal-body">
+            <div className="modal-content">
+              <div>
+                <img src={DeleteModal} alt="deleteModal" />
+              </div>
+              <div>
+                <h5>Menghapus Data Mobil</h5>
+                <p>Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
+              </div>
+              <div>
+                <button
+                  onClick={() => {
+                    onYes();
+                  }}
+                >
+                  ya
+                </button>
+                <button onClick={onCancel}>tidak</button>
+              </div>
+            </div>
+          </ModalBody>
+        </Modal>
       </div>
-      <div key="id" className="group-card">
-        <Cards />
-      </div>
-
-      <Modal className="modal" show={modalOpen} animation={true}>
-        <ModalBody className="modal-body">
-          <div className="modal-content">
-            <div>
-              <img src={DeleteModal} />
-            </div>
-            <div>
-              <h5>Menghapus Data Mobil</h5>
-              <p>Setelah dihapus, data mobil tidak dapat dikembalikan. Yakin ingin menghapus?</p>
-            </div>
-            <div>
-              <button
-                onClick={() => {
-                  onYes(cars.id);
-                  console.log(cars);
-                }}
-              >
-                ya
-              </button>
-              <button onClick={onCancel}>tidak</button>
-            </div>
-          </div>
-        </ModalBody>
-      </Modal>
-    </div>
+    </>
   );
 };
 
