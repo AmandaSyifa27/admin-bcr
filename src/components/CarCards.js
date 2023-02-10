@@ -5,12 +5,14 @@ import UpadateTime from "../assets/UpdateTime.png";
 import { FormOutlined, DeleteOutlined } from "@ant-design/icons";
 import "../styles/CarCards.css";
 import { useNavigate } from "react-router-dom";
-// import DeleteButton from "./DeleteButton";
 import { Modal, ModalBody } from "react-bootstrap";
 import DeleteModal from "../assets/DeleteModal.png";
 import "../styles/DeleteButton.css";
 import { Link, useLocation } from "react-router-dom";
 import { message } from "antd";
+
+import { fetchSearchCars, searchPayloadSearchCars, selectSearchCar, setPayload } from "../store/features/searchCarSlice.js";
+import { useDispatch, useSelector } from "react-redux";
 
 export function convertToLocalCurrrency(number) {
   if (!number) return null;
@@ -79,6 +81,9 @@ const CarCards = () => {
   const [carIdForDelete, setCarIdForDelete] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
   const location = useLocation();
+  // const dispatch = useDispatch();
+  // const { payload } = useSelector(searchPayloadSearchCars);
+
   // console.log(location);
 
   // const { car, payload } = location.state;
@@ -99,12 +104,21 @@ const CarCards = () => {
     setIsActive(isActive);
   }
 
-  React.useEffect(() => {
-    APIOrder.getCarsList().then((res) => {
-      setCars(res.data.cars);
-      console.log(res.data);
-    });
-  }, []);
+  // React.useEffect(() => {
+  //   dispatch(setPayload({}));
+  // });
+
+  // React.useEffect(() => {
+  // APIOrder.getCarsList().then((res) => {
+  //   setCars(res.data.cars);
+  //   console.log(res.data);
+  // });
+  // if (payload) {
+  //   dispatch(fetchSearchCars({ ...payload }));
+  // } else {
+  //   dispatch(fetchSearchCars());
+  // }
+  // }, [payload, dispatch]);
 
   const onDelete = (id) => {
     setModalOpen(true);

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Form, FormControl, Nav, DropdownButton, Dropdown } from "react-bootstrap";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
@@ -6,27 +6,21 @@ import { useNavigate } from "react-router-dom";
 import adminInit from "../assets/AdminInit.png";
 import Auth from "../utils/Auth";
 import APIOrder from "../apis/APIOrder.js";
+// import { setCars } from "../store/features/searchCarSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { setPayload, searchPayloadSearchCars } from "../store/features/searchCarSlice.js";
 
 const Header = () => {
   const navigate = useNavigate();
   const [car, setCar] = useState("");
+  const [searchByName, setSearchValue] = useState("");
+  const dispatch = useDispatch();
+  const { payload } = useSelector(searchPayloadSearchCars);
 
-  const handelSearch = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const carName = formData.get("name");
-
-    try {
-      const result = await APIOrder.getCarsList(`?name=${carName}`);
-      if (result.status === 200) {
-        console.log(result.data);
-        setCar(result.data.cars);
-        const returnTo = "/list-cars";
-        navigate(returnTo);
-      }
-    } catch (error) {
-      alert("failed");
-    }
+  const handleSearch = (e) => {
+    dispatch(setPayload({ ...payload, name: e.target.value }));
+    navigate("/list-cars");
+    console.log(e.target.value);
   };
 
   const logOut = () => {
@@ -44,10 +38,17 @@ const Header = () => {
       <Navbar className="navbar" variant="light" bg="white">
         <Container className="container-header">
           <Nav>
-            <Form className="d-flex">
-              <FormControl name="name" type="search" placeholder="Search" className="nav-form" aria-label="Search" />
-              <button>Search</button>
-            </Form>
+            <div className="d-flex">
+              <input
+                name="name"
+                type="search"
+                placeholder="Search"
+                className="nav-form"
+                aria-label="Search"
+                onChange={(value) => handleSearch(value)}
+              />
+              <button type="submit">Search</button>
+            </div>
             <div
               className="admin-init d-flex"
               style={{ backgroundColor: "#CFD4ED", borderRadius: "50px", width: "38px", marginLeft: "24px" }}

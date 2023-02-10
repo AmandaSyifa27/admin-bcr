@@ -8,8 +8,12 @@ import CarCards from "../components/CarCards";
 import Header from "../components/Header";
 import Sidebar1 from "../components/Sidebar1.js";
 import Sidebar2 from "../components/Sidebar2.js";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchSearchCars, searchPayloadSearchCars, selectSearchCar, setPayload } from "../store/features/searchCarSlice.js";
 
 const ListCars = () => {
+  // const searchCar = useSelector(selectSearchCar);
+
   return (
     <div className="listcars" role="listcars">
       <div className="sidebar">
