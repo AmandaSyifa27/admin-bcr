@@ -8,6 +8,7 @@ const APIOrder = {
       if (pageSize) params["pageSize"] = pageSize;
       const response = await axiosInstance.get("/v2/order", { params });
       return response.data;
+      console.log(response.data);
     } catch (error) {
       throw new Error(error);
       console.log(error);

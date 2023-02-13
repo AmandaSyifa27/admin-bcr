@@ -3,16 +3,16 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchSearchCars = createAsyncThunk("fetch/searchCars", async (params) => {
   try {
-    const result = APIOrder.getCarsList(params);
+    const result = APIOrder.getCarsList({ params });
     return result;
-    console.log(result);
   } catch (error) {
     alert("failed");
   }
+  console.log(params);
 });
 
 const initialState = {
-  payload: { category: "", page: 1, pageSize: 8 },
+  payload: {},
   data: null,
   status: "idle",
 };
@@ -43,5 +43,5 @@ const searchCarsSlice = createSlice({
 
 export const { setPayload } = searchCarsSlice.actions;
 export default searchCarsSlice.reducer;
-export const selectSearchCars = (state) => state.searchCars;
+export const selectSearchCar = (state) => state.searchCars;
 export const searchPayloadSearchCars = (state) => state.searchCars.payload;

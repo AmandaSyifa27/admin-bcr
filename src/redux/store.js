@@ -1,7 +1,6 @@
 import { applyMiddleware, createStore, compose } from "redux";
 import { persistStore } from "redux-persist";
 import ReduxThunk from "redux-thunk";
-// import logger from "redux-logger";
 import reducers from "./persistance";
 
 let middlewareEnhancer;

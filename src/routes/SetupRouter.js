@@ -9,7 +9,6 @@ import PrivateRoute from "./PrivateRoute";
 import ProtectedRoute from "./ProtectedRoute";
 import Dummy from "../components/Dummy";
 import EditCar from "../pages/EditCar";
-// import OrdersTable from "../components/OrdersTable";
 
 function SetUpRouter() {
   return (
@@ -24,7 +23,6 @@ function SetUpRouter() {
           <Route path="/add-car" element={<AddCar />} />
           <Route path="/dummy" element={<Dummy />} />
           <Route path="/edit-car/:carId" element={<EditCar />} />
-          {/* <Route path="/orders-table" element={<OrdersTable />} /> */}
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

@@ -52,8 +52,6 @@ const EditCarForm = () => {
         setCategory(category);
         setImage(image);
         setCarData(values);
-        // console.log(setCarData());
-        // console.log(values);
         const returnTo = "/list-cars";
         navigate(returnTo);
         message.success("Data Berhasil Disimpan");
