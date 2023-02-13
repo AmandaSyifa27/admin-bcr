@@ -1,5 +1,4 @@
 import Cookies from "js-cookie";
-import { useNavigate } from "react-router-dom";
 
 const Auth = {
   isAuthorization: () => {
@@ -10,7 +9,6 @@ const Auth = {
   getAccesToken: () => Cookies.get("token"),
   logOut: () => {
     Cookies.remove("token");
-    // navigate("/sign-in");
   },
   storeUserInfoToCookies: (token) => {
     if (token) Cookies.set("token", token);
