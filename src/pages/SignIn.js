@@ -4,15 +4,18 @@ import { useLocation, useNavigate } from "react-router-dom";
 import APIAuth from "../apis/APIAuth";
 import { Alert } from "react-bootstrap";
 import LoginLogo from "../assets/Logo.png";
-import LoginImg from "../assets/login.jpg"
-// import SigninImg from "../assets/SigninImg.png";
-// import SigninImage from "../assets/SigninImg.png";
+import LoginImg from "../assets/login.jpg";
+import { Input } from "antd";
+import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { message } from "antd";
 
 const SignIn = () => {
   const navigate = useNavigate();
   const { search } = useLocation();
   // const [alert, setAlert] = useState(false);
   const [alertFail, setAlertFail] = useState(false);
+  const [passwordVisible, setPasswordVisible] = React.useState(false);
+  const [messageApi, contextHolder] = message.useMessage();
 
   // if (alert) {
   //   return (
@@ -51,10 +54,8 @@ const SignIn = () => {
       const params = new URLSearchParams(search);
       const redirectTo = params.get("return_To");
       if (redirectTo) returnTo += `${redirectTo}`;
-      setTimeout(() => {
-        navigate(returnTo);
-      }, 3000);
-      // navigate(returnTo);
+      message.success("Logged in");
+      navigate(returnTo);
     } catch (error) {
       setAlertFail(true);
       return null;
@@ -62,7 +63,8 @@ const SignIn = () => {
   };
 
   return (
-    <div className="flex flex-col lg:flex-row justify-center h-screen w-full">
+    <div className="flex flex-col lg:flex-row justify-center h-screen w-full" data-testid="signin-test">
+      {contextHolder}
       <div className="xl:w-2/3 hidden xl:block">
         <img className="w-full h-full object-cover" src={LoginImg} alt="LoginImg" />
       </div>
@@ -92,11 +94,12 @@ const SignIn = () => {
 
           <div className="flex flex-col text-black-900 py-2">
             <label className="font-medium text-lg">Password</label>
-            <input
+            <Input.Password
               className="text-center text-lg rounded-xl border mt-2 p-2 focus:bg-indigo-50"
               type="password"
               name="password"
               placeholder="6+ Karakter"
+              iconRender={(visible) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)}
             />
           </div>
 

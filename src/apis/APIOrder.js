@@ -10,6 +10,8 @@ const APIOrder = {
       return response.data;
     } catch (error) {
       throw new Error(error);
+      console.log(error);
+      alert("eror");
     }
   },
   getOrderReports: async ({ from, until }) => {
@@ -23,8 +25,8 @@ const APIOrder = {
       throw new Error(error);
     }
   },
-  getCarsList: async () => {
-    const response = await axiosInstance.get("/v2/car");
+  getCarsList: async (search) => {
+    const response = await axiosInstance.get(`/v2/car${search}`);
     return response;
   },
   postCar: async (formData) => {

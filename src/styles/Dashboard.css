@@ -81,7 +81,7 @@
 }
 Form .nav-form {
   width: 174px;
-  border-radius: 0;
+  border-radius: 2px;
 }
 Form button {
   background-color: white;
