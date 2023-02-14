@@ -29,19 +29,7 @@ function OrdersTable() {
   React.useEffect(() => {
     APIOrder.getListOrder({ currentPage, pageSize }).then((res) => {
       setData(res);
-      // setPageSize(res.pageSize);
     });
-    // const coba = axios.get("https://bootcamp-rent-cars.herokuapp.com/admin/v2/order", {
-    //   headers: {
-    //     acces_token:
-    //       "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQGJjci5pbyIsInJvbGUiOiJBZG1pbiIsImlhdCI6MTY2NTI0MjUwOX0.ZTx8L1MqJ4Az8KzoeYU2S614EQPnqk6Owv03PUSnkzc",
-    //   },
-    //   currentPage,
-    //   pageSize,
-    // });
-    // console.log(coba);
-    // setData(coba.data);
-    // setPageSize(coba.pageSize);
   }, [currentPage, pageSize]);
 
   const columns = [

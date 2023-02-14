@@ -21,24 +21,7 @@ const Dummy = () => {
         <div className="logo">
           <div style={{ margin: "18px", height: "34px", background: "#CFD4ED" }} />
         </div>
-        <Menu
-          theme="light"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          // items={[
-          //   {
-          //     key: "1",
-          //     icon: <UserOutlined />,
-          //     label: "Dashboard",
-          //   },
-          //   {
-          //     key: "2",
-          //     // icon: <VideoCameraOutlined />,
-          //     icon: <img src={dashboard} alt="dashboadr" />,
-          //     label: "List Cars",
-          //   },
-          // ]}
-        >
+        <Menu theme="light" mode="inline" defaultSelectedKeys={["1"]}>
           <div className="bar-samping d-flex ">
             <div className="sb-1">
               <div className="sidebar-menu">

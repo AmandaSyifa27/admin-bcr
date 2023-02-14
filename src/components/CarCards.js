@@ -31,7 +31,7 @@ const Cards = ({ cars, filterByCategory, onDelete }) => {
   if (cars.length === 0)
     return (
       <div style={{ textAlign: "center", margin: "auto", color: "#0d28a6" }}>
-        <img src={carNotFound} alt="notfoundcar" />
+        <img src={carNotFound} alt="notfoundcar" style={{ marginBottom: "10px" }} />
         <em>Car Not Found...</em>
       </div>
     );
@@ -68,7 +68,7 @@ const Cards = ({ cars, filterByCategory, onDelete }) => {
                 <small> Delete</small>
               </button>
             </div>
-            <Link to={`/edit-car/${car.id}`}>
+            <Link to={`/list-cars/edit-car/${car.id}`}>
               <button className="on-edit">
                 <FormOutlined />
                 <small> Edit</small>
