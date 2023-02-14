@@ -22,7 +22,7 @@ function SetUpRouter() {
           <Route path="/list-cars" element={<ListCars />} />
           <Route path="/add-car" element={<AddCar />} />
           <Route path="/dummy" element={<Dummy />} />
-          <Route path="/edit-car/:carId" element={<EditCar />} />
+          <Route path="/list-cars/edit-car/:carId" element={<EditCar />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

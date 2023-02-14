@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import dashboardImg from "../assets/DashboardImg.png";
 import carsImg from "../assets/CarsImg.png";
 import "../styles/ListCars.css";
-// import { getCarsList } from "../apis/APIOrder";
 import CarCards from "../components/CarCards";
 import Header from "../components/Header";
 import Sidebar1 from "../components/Sidebar1.js";
@@ -63,7 +62,7 @@ const ListCars = () => {
                 <Link
                   to="/add-car"
                   style={{
-                    listStyleType: "none",
+                    listStyleType: "nonea",
                   }}
                 >
                   <button style={{ display: "flex" }}>

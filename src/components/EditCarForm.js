@@ -28,7 +28,6 @@ const EditCarForm = () => {
         setCategory(res.data.category);
         setCreatedAt(res.data.createdAt);
         setUpdatedAt(res.data.updatedAt);
-        // setImage(res.data.image);
       } else {
         alert("Failed to catch car data");
       }

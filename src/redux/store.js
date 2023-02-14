@@ -5,7 +5,6 @@ import reducers from "./persistance";
 
 let middlewareEnhancer;
 if (process.env.NODE_ENV === "development") {
-  // middlewareEnhancer = applyMiddleware(ReduxThunk);
   middlewareEnhancer = applyMiddleware(ReduxThunk);
 } else {
   middlewareEnhancer = applyMiddleware(ReduxThunk);
