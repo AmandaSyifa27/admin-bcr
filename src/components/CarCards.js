@@ -141,15 +141,8 @@ const CarCards = () => {
           <button className={isActive ? "active-button" : null} onClick={showAll}>
             All
           </button>
-          {/* <button className={isActive ? "active-button" : null} onClick={showSmall}>
+          <button className={isActive ? "active-button" : null} onClick={showSmall}>
             2 - 4 people
-          </button> */}
-          <button
-            onClick={() => {
-              dispatch(SmallFilter());
-            }}
-          >
-            keil
           </button>
           <button className={isActive ? "active-button" : null} onClick={showMedium}>
             4 - 6 people
