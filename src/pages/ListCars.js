@@ -60,9 +60,9 @@ const ListCars = () => {
               <div className="feature">
                 <h3>List Car</h3>
                 <Link
-                  to="/add-car"
+                  to="/list-cars/add-car"
                   style={{
-                    listStyleType: "nonea",
+                    textDecoration: "none",
                   }}
                 >
                   <button style={{ display: "flex" }}>

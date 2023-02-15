@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import APIOrder from "../apis/APIOrder";
 import Category from "../assets/Category.png";
 import UpadateTime from "../assets/UpdateTime.png";
-import { FormOutlined, DeleteOutlined } from "@ant-design/icons";
+import { FormOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
 import "../styles/CarCards.css";
 import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody } from "react-bootstrap";
 import DeleteModal from "../assets/DeleteModal.png";
 import "../styles/DeleteButton.css";
 import { Link, useLocation } from "react-router-dom";
-import { message } from "antd";
+import { message, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
 import { ActCarlist, Searchlist } from "../redux/actions/Carlist";
 import carNotFound from "../assets/DeleteModal.png";
@@ -145,6 +145,11 @@ const CarCards = () => {
           <button className={isActive ? "active-button" : null} onClick={showLarge}>
             6 - 8 people
           </button>
+          <Button
+            style={{ border: "none", background: "none", boxShadow: "none" }}
+            onClick={() => window.location.reload(false)}
+            icon={<ReloadOutlined />}
+          />
         </div>
         <div key="id" className="card-group">
           <Cards cars={reducerCarlist.data} filterByCategory={filterByCategory} onDelete={onDelete} />
