@@ -1,19 +1,11 @@
 import APIOrder from "../../apis/APIOrder";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-export const fetchSearchCars = createAsyncThunk("fetch/searchCars", async (params) => {
-  try {
-    const result = APIOrder.getCarsList({ params });
-    return result;
-  } catch (error) {
-    alert("failed");
-  }
-  console.log(params);
-});
+export const fetchSearchCars = createAsyncThunk("fetch/searchCars", APIOrder.getCarsList);
 
 const initialState = {
   payload: {},
-  data: null,
+  data: { cars: [] },
   status: "idle",
 };
 
@@ -43,5 +35,5 @@ const searchCarsSlice = createSlice({
 
 export const { setPayload } = searchCarsSlice.actions;
 export default searchCarsSlice.reducer;
-export const selectSearchCar = (state) => state.searchCars;
+export const selectSearchCars = (state) => state.searchCars;
 export const searchPayloadSearchCars = (state) => state.searchCars.payload;

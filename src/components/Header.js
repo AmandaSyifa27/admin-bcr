@@ -1,15 +1,14 @@
-import React, { useState } from "react";
-import { Form, FormControl, Nav, DropdownButton, Dropdown } from "react-bootstrap";
+import React from "react";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
-import { useNavigate } from "react-router-dom";
-import adminInit from "../assets/AdminInit.png";
-import Auth from "../utils/Auth";
-import APIOrder from "../apis/APIOrder.js";
-import { useDispatch, useSelector } from "react-redux";
-import { ActClearedSearchCar, ActSearchCar, Searchlist } from "../redux/actions/Carlist";
+import { Form, Nav, DropdownButton, Dropdown } from "react-bootstrap";
 import { Input } from "antd";
 import { SearchOutlined } from "@ant-design/icons";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { setPayload } from "../store/features/searchCarSlicing";
+import { ActClearedSearchCar } from "../redux/actions/Carlist";
+import Auth from "../utils/Auth";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -26,7 +25,7 @@ const Header = () => {
   };
   function onSearch(e) {
     e.preventDefault();
-    dispatch(ActSearchCar(e.target.value));
+    dispatch(setPayload({ name: e.target.value }));
     navigate("/list-cars");
   }
 
