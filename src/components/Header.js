@@ -3,7 +3,6 @@ import { Form, FormControl, Nav, DropdownButton, Dropdown } from "react-bootstra
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { useNavigate } from "react-router-dom";
-import adminInit from "../assets/AdminInit.png";
 import Auth from "../utils/Auth";
 import APIOrder from "../apis/APIOrder.js";
 import { useDispatch, useSelector } from "react-redux";

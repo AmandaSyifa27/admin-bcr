@@ -11,7 +11,7 @@ import "../styles/DeleteButton.css";
 import { Link, useLocation } from "react-router-dom";
 import { message, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { ActCarlist, Searchlist } from "../redux/actions/Carlist";
+import { ActCarlist, Searchlist, SmallFilter } from "../redux/actions/Carlist";
 import carNotFound from "../assets/DeleteModal.png";
 
 export function convertToLocalCurrrency(number) {
@@ -136,8 +136,15 @@ const CarCards = () => {
           <button className={isActive ? "active-button" : null} onClick={showAll}>
             All
           </button>
-          <button className={isActive ? "active-button" : null} onClick={showSmall}>
+          {/* <button className={isActive ? "active-button" : null} onClick={showSmall}>
             2 - 4 people
+          </button> */}
+          <button
+            onClick={() => {
+              dispatch(SmallFilter());
+            }}
+          >
+            keil
           </button>
           <button className={isActive ? "active-button" : null} onClick={showMedium}>
             4 - 6 people
