@@ -20,7 +20,7 @@ function SetUpRouter() {
         <Route path="/" element={<PrivateRoute />}>
           <Route index element={<Dashboard />} />
           <Route path="/list-cars" element={<ListCars />} />
-          <Route path="/add-car" element={<AddCar />} />
+          <Route path="/list-cars/add-car" element={<AddCar />} />
           <Route path="/dummy" element={<Dummy />} />
           <Route path="/list-cars/edit-car/:carId" element={<EditCar />} />
         </Route>
