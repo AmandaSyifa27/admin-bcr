@@ -26,9 +26,13 @@ const APIOrder = {
       throw new Error(error);
     }
   },
-  getCarsList: async (search) => {
-    const response = await axiosInstance.get(`/v2/car${search}`);
-    return response;
+  getCarsList: async (params) => {
+    try {
+      const response = await axiosInstance.get("/v2/car", { params });
+      return response.data;
+    } catch (error) {
+      throw new Error(error);
+    }
   },
   postCar: async (formData) => {
     const response = await axiosInstance.post("/car", formData, {

@@ -1,18 +1,17 @@
 import React, { useState } from "react";
-import APIOrder from "../apis/APIOrder";
-import Category from "../assets/Category.png";
-import UpadateTime from "../assets/UpdateTime.png";
 import { FormOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
-import "../styles/CarCards.css";
-import { useNavigate } from "react-router-dom";
 import { Modal, ModalBody } from "react-bootstrap";
-import DeleteModal from "../assets/DeleteModal.png";
-import "../styles/DeleteButton.css";
 import { Link, useLocation } from "react-router-dom";
 import { message, Button } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { ActCarlist, Searchlist, SmallFilter } from "../redux/actions/Carlist";
+import { fetchSearchCars, searchPayloadSearchCars, selectSearchCars } from "../store/features/searchCarSlicing";
+import APIOrder from "../apis/APIOrder";
 import carNotFound from "../assets/DeleteModal.png";
+import DeleteModal from "../assets/DeleteModal.png";
+import Category from "../assets/Category.png";
+import UpdateTime from "../assets/UpdateTime.png";
+import "../styles/CarCards.css";
+import "../styles/DeleteButton.css";
 
 export function convertToLocalCurrrency(number) {
   if (!number) return null;
@@ -56,7 +55,7 @@ const Cards = ({ cars, filterByCategory, onDelete }) => {
                 </small>
               </div>
               <div style={{ display: "inline" }}>
-                <img src={UpadateTime} alt="updateTime" />
+                <img src={UpdateTime} alt="updateTime" />
                 <small>Updated at {convertToLocalTime(car.updatedAt.split(","))}.00</small>
               </div>
             </div>
@@ -88,7 +87,9 @@ const CarCards = () => {
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
   const location = useLocation();
-  const reducerCarlist = useSelector((state) => state.CarlistStateReducer);
+
+  const statePayloadSearchCars = useSelector(searchPayloadSearchCars);
+  const stateSearchCars = useSelector(selectSearchCars);
 
   function showAll() {
     setFilterByCategory("");
@@ -106,9 +107,13 @@ const CarCards = () => {
     setIsActive(isActive);
   }
 
+  // React.useEffect(() => {
+  //   dispatch(ActCarlist());
+  // }, [reducerCarlist.search]);
+
   React.useEffect(() => {
-    dispatch(ActCarlist());
-  }, [reducerCarlist.search]);
+    if (statePayloadSearchCars) dispatch(fetchSearchCars(statePayloadSearchCars));
+  }, [statePayloadSearchCars, dispatch]);
 
   const onDelete = (id) => {
     setModalOpen(true);
@@ -159,7 +164,7 @@ const CarCards = () => {
           />
         </div>
         <div key="id" className="card-group">
-          <Cards cars={reducerCarlist.data} filterByCategory={filterByCategory} onDelete={onDelete} />
+          <Cards cars={stateSearchCars.data.cars} filterByCategory={filterByCategory} onDelete={onDelete} />
         </div>
         <Modal className="modal" show={modalOpen} animation={true} centered>
           <ModalBody className="modal-body">

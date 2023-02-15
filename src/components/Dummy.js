@@ -1,13 +1,13 @@
+import React, { useState } from "react";
+import CarCards from "../components/CarCards.js";
+import carsImg from "../assets/CarsImg.png";
+import dashboard from "../assets/DashboardImg.png";
+import dashboardImg from "../assets/DashboardImg.png";
+import { Layout, Menu, theme } from "antd";
+import { Link } from "react-router-dom";
 import { MenuFoldOutlined, MenuUnfoldOutlined, UploadOutlined, UserOutlined, VideoCameraOutlined } from "@ant-design/icons";
 import "../styles/Dummy.css";
-import { Layout, Menu, theme } from "antd";
-import React, { useState } from "react";
 import "../styles/ListCars.css";
-import dashboard from "../assets/DashboardImg.png";
-import CarCards from "../components/CarCards.js";
-import { Link } from "react-router-dom";
-import dashboardImg from "../assets/DashboardImg.png";
-import carsImg from "../assets/CarsImg.png";
 
 const { Header, Sider, Content } = Layout;
 const Dummy = () => {
