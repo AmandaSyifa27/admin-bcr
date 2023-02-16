@@ -1,10 +1,11 @@
+import React from "react";
 import APIOrder from "../../apis/APIOrder";
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 export const fetchSearchCars = createAsyncThunk("fetch/searchCars", APIOrder.getCarsList);
 
 const initialState = {
-  payload: {},
+  payload: { category: "", page: 1 },
   data: { cars: [] },
   status: "idle",
 };

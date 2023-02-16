@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { FormOutlined, DeleteOutlined, ReloadOutlined } from "@ant-design/icons";
+import { FormOutlined, DeleteOutlined, ReloadOutlined, LoadingOutlined } from "@ant-design/icons";
 import { Modal, ModalBody } from "react-bootstrap";
 import { Link, useLocation } from "react-router-dom";
-import { message, Button } from "antd";
+import { message, Button, Pagination } from "antd";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchSearchCars, searchPayloadSearchCars, selectSearchCars } from "../store/features/searchCarSlicing";
+import { fetchSearchCars, searchPayloadSearchCars, setPayload, selectSearchCars } from "../store/features/searchCarSlicing";
 import APIOrder from "../apis/APIOrder";
 import carNotFound from "../assets/DeleteModal.png";
 import DeleteModal from "../assets/DeleteModal.png";
@@ -13,7 +13,7 @@ import UpdateTime from "../assets/UpdateTime.png";
 import "../styles/CarCards.css";
 import "../styles/DeleteButton.css";
 
-export function convertToLocalCurrrency(number) {
+export function convertToLocalCurrency(number) {
   if (!number) return null;
   const formatter = new Intl.NumberFormat("id-Id", { style: "currency", currency: "IDR" });
   return formatter.format(number);
@@ -27,11 +27,21 @@ export function convertToLocalTime(utc) {
 }
 
 const Cards = ({ cars, filterByCategory, onDelete }) => {
+  const stateSearchCars = useSelector(selectSearchCars);
+  const status = stateSearchCars.status;
+
   if (cars.length === 0)
     return (
       <div style={{ textAlign: "center", margin: "auto", color: "#0d28a6" }}>
         <img src={carNotFound} alt="notfoundcar" style={{ marginBottom: "10px" }} />
         <em>Car Not Found...</em>
+      </div>
+    );
+  if (status === "loading")
+    return (
+      <div style={{ margin: "auto", textAlign: "center", color: "#0d28a6" }}>
+        <LoadingOutlined />
+        <em style={{ marginTop: "10px", display: "block" }}>Loading...</em>
       </div>
     );
   return cars
@@ -45,17 +55,31 @@ const Cards = ({ cars, filterByCategory, onDelete }) => {
           <div className="card-content">
             <div className="card-info">
               <small>{car.name}</small>
-              <strong>{convertToLocalCurrrency(car.price)} / hari</strong>
-              <div style={{ display: "inline" }}>
-                <img src={Category} alt="categoryPic" />
+              <strong>{convertToLocalCurrency(car.price)} / hari</strong>
+              <div style={{ display: "flex" }}>
+                <img
+                  src={Category}
+                  alt="categoryPic"
+                  style={{
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                  }}
+                />
                 <small>
                   {car.category === "small" && "2 - 4 people"}
                   {car.category === "medium" && "4 - 6 people"}
                   {car.category === "large" && "6 - 8 people"}
                 </small>
               </div>
-              <div style={{ display: "inline" }}>
-                <img src={UpdateTime} alt="updateTime" />
+              <div style={{ display: "flex" }}>
+                <img
+                  src={UpdateTime}
+                  alt="updateTime"
+                  style={{
+                    marginTop: "auto",
+                    marginBottom: "auto",
+                  }}
+                />
                 <small>Updated at {convertToLocalTime(car.updatedAt.split(","))}.00</small>
               </div>
             </div>
@@ -80,8 +104,6 @@ const Cards = ({ cars, filterByCategory, onDelete }) => {
 };
 
 const CarCards = () => {
-  const [filterByCategory, setFilterByCategory] = useState("");
-  const [isActive, setIsActive] = useState(false);
   const [modalOpen, setModalOpen] = useState(false);
   const [carIdForDelete, setCarIdForDelete] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
@@ -90,26 +112,22 @@ const CarCards = () => {
 
   const statePayloadSearchCars = useSelector(searchPayloadSearchCars);
   const stateSearchCars = useSelector(selectSearchCars);
+  const category = stateSearchCars.payload.category;
+  const page = stateSearchCars.payload.page;
+  const pageCount = stateSearchCars.data.pageCount;
 
   function showAll() {
-    setFilterByCategory("");
+    dispatch(setPayload({ ...statePayloadSearchCars, category: "" }));
   }
   function showSmall() {
-    setFilterByCategory("small");
-    setIsActive(isActive);
+    dispatch(setPayload({ ...statePayloadSearchCars, category: "small" }));
   }
   function showMedium() {
-    setFilterByCategory("medium");
-    setIsActive(isActive);
+    dispatch(setPayload({ ...statePayloadSearchCars, category: "medium" }));
   }
   function showLarge() {
-    setFilterByCategory("large");
-    setIsActive(isActive);
+    dispatch(setPayload({ ...statePayloadSearchCars, category: "large" }));
   }
-
-  // React.useEffect(() => {
-  //   dispatch(ActCarlist());
-  // }, [reducerCarlist.search]);
 
   React.useEffect(() => {
     if (statePayloadSearchCars) dispatch(fetchSearchCars(statePayloadSearchCars));
@@ -133,23 +151,19 @@ const CarCards = () => {
     setModalOpen(false);
   };
 
+  function handleChangePage(value) {
+    dispatch(setPayload({ ...statePayloadSearchCars, page: value }));
+  }
+
   return (
     <>
       {contextHolder}
       <div className="CarCards">
         <div className="buttons">
-          <button className={isActive ? "active-button" : null} onClick={showAll}>
-            All
-          </button>
-          <button className={isActive ? "active-button" : null} onClick={showSmall}>
-            2 - 4 people
-          </button>
-          <button className={isActive ? "active-button" : null} onClick={showMedium}>
-            4 - 6 people
-          </button>
-          <button className={isActive ? "active-button" : null} onClick={showLarge}>
-            6 - 8 people
-          </button>
+          <button onClick={showAll}>All</button>
+          <button onClick={showSmall}>2 - 4 people</button>
+          <button onClick={showMedium}>4 - 6 people</button>
+          <button onClick={showLarge}>6 - 8 people</button>
           <Button
             style={{ border: "none", background: "none", boxShadow: "none" }}
             onClick={() => window.location.reload(false)}
@@ -157,7 +171,7 @@ const CarCards = () => {
           />
         </div>
         <div key="id" className="card-group">
-          <Cards cars={stateSearchCars.data.cars} filterByCategory={filterByCategory} onDelete={onDelete} />
+          <Cards cars={stateSearchCars.data.cars} onDelete={onDelete} />
         </div>
         <Modal className="modal" show={modalOpen} animation={true} centered>
           <ModalBody className="modal-body">
@@ -183,6 +197,18 @@ const CarCards = () => {
           </ModalBody>
         </Modal>
       </div>
+      <Pagination
+        onChange={(value) => handleChangePage(value)}
+        defaultCurrent={page}
+        total={`${pageCount}0`}
+        style={{
+          width: "fit-content",
+          marginLeft: "auto",
+          marginRight: "30px",
+          marginTop: "30px",
+          marginBottom: "40px",
+        }}
+      />
     </>
   );
 };

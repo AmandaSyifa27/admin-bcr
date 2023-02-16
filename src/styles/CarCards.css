@@ -26,8 +26,8 @@
 .card-info {
   display: flex;
   flex-direction: column;
-  line-height: 33px;
   margin-bottom: 24px;
+  gap: 16px;
 }
 .card-info img {
   margin-right: 8px;
