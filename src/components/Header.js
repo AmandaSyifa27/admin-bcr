@@ -41,23 +41,24 @@ const Header = () => {
                 placeholder="Search"
                 type="text"
                 className="nav-form"
+                allowClear
               />
               <button
-                onClick={() => {
-                  dispatch(ActClearedSearchCar());
+                onClick={(e) => {
+                  onSearch(e);
                 }}
                 style={{
                   padding: "8px 12px",
                 }}
               >
-                Clear
+                Search
               </button>
             </Form>
             <div
               className="admin-init d-flex"
               style={{ backgroundColor: "#CFD4ED", borderRadius: "50px", width: "38px", marginLeft: "24px" }}
             >
-              <p style={{ margin: "auto", textAlign: "center" }}>U</p>
+              <bold style={{ margin: "auto", textAlign: "center" }}>A</bold>
             </div>
             <DropdownButton id="dropdown-basic-button" title="Admin">
               <Dropdown.Item

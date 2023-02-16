@@ -6,8 +6,8 @@ import {
   ACTIVITY_CARLIST_REDUCER_PENDING,
   ACTIVITY_CARLIST_REDUCER_REJECT,
   ACTIVITY_CARLIST_REDUCER_SEARCH,
+  ACTIVITY_CARLIST_FILTER_SMALL,
 } from "../type/typeCarlist";
-import { CAR_FILTER_PENDING, CAR_FILTER_FULFILLED, CAR_FILTER_REJECTED } from "../type/typeCarlist";
 
 export function ActSearchCar(search) {
   return (dispatch, State) => {
@@ -17,8 +17,6 @@ export function ActSearchCar(search) {
     });
   };
 }
-
-export function setFilter() {}
 
 export function ActClearedSearchCar() {
   return (dispatch, State) => {
@@ -47,5 +45,18 @@ export function ActCarlist() {
           type: ACTIVITY_CARLIST_REDUCER_REJECT,
         });
       });
+  };
+}
+
+export function SmallFilter() {
+  return (dispatch, getState) => {
+    const { category } = getState();
+    APIOrder.getCarsList(`?category=${category}`).then((res) => {
+      dispatch({
+        type: ACTIVITY_CARLIST_FILTER_SMALL,
+        status: res.status,
+        payload: res.data.cars,
+      });
+    });
   };
 }
