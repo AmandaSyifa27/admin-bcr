@@ -1,15 +1,20 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import React from "react";
+import { BrowserRouter } from "react-router-dom";
 import { render } from "@testing-library/react";
 import { configureStore } from "@reduxjs/toolkit";
-import rootReducer from "..store/features";
-import Provider from "react-redux";
+import rootReducer from "../store/features";
+import { Provider } from "react-redux";
 
-export default function renderWithRouter(
+export default function renderWithProvider(
   children,
-  { preloadState = {}, store = configureStore({ reducer: rootReducer, preloadState }) } = {}
+  { preloadState = {}, store = configureStore({ reducer: rootReducer, preloadState }), ...renderOptions } = {}
 ) {
   function Wrapper({ children }) {
-    return <BrowserRouter>{children}</BrowserRouter>;
+    return (
+      <Provider store={store}>
+        <BrowserRouter>{children}</BrowserRouter>;
+      </Provider>
+    );
   }
   return render(<Wrapper>{children}</Wrapper>);
 }

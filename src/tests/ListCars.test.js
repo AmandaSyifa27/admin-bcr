@@ -1,16 +1,16 @@
 import { screen } from "@testing-library/react";
 import React from "react";
 import ListCars from "../pages/ListCars";
-import renderWithRouter from "../utils/testUtils";
+import renderWithProvider from "../utils/testUtils";
 
 describe("List Cars test", () => {
-  it("should have di with classname listcars", () => {
-    renderWithRouter(<ListCars />);
+  it("should have div element with classname listcars", () => {
+    renderWithProvider(<ListCars />);
     expect(screen.getByRole("listcars")).toBeInTheDocument();
   });
 
   it("buttons should working corretly", () => {
-    renderWithRouter(<ListCars />);
+    renderWithProvider(<ListCars />);
     const addCarButton = screen.getByText(/add new car/i);
     expect(addCarButton).toBeInTheDocument();
 
@@ -20,7 +20,7 @@ describe("List Cars test", () => {
   });
 
   it("should have some images", () => {
-    renderWithRouter(<ListCars />);
+    renderWithProvider(<ListCars />);
     const dashBoardImg = screen.getByAltText(/dashboardimg/i);
     expect(dashBoardImg).toBeInTheDocument();
 
