@@ -1,8 +1,7 @@
 import React from "react";
 import APIOrder from "../apis/APIOrder";
-import { useNavigate, Link } from "react-router-dom";
 import { message } from "antd";
-import { convertToLocalTime } from "../components/CarCards.js";
+import { useNavigate, Link } from "react-router-dom";
 
 export function today() {
   let now = new Date();
@@ -10,10 +9,6 @@ export function today() {
   let month = now.getMonth();
   let year = now.getFullYear();
   return `${date}/${month}/${year}`;
-}
-export function day() {
-  let date = new Date().toLocaleString() + " ";
-  return date;
 }
 
 const AddCarForm = () => {
@@ -23,10 +18,10 @@ const AddCarForm = () => {
   const handleAdd = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-    const name = formData.get("name");
-    const price = formData.get("price");
-    const image = formData.get("image");
-    const category = formData.get("category");
+    // const name = formData.get("name");
+    // const price = formData.get("price");
+    // const image = formData.get("image");
+    // const category = formData.get("category");
 
     try {
       await APIOrder.postCar(formData);

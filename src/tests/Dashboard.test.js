@@ -1,7 +1,7 @@
 import React from "react";
-import { fireEvent, screen } from "@testing-library/react";
 import Dashboard from "../pages/Dashboard";
 import renderWithProvider from "../utils/testUtils";
+import { fireEvent, screen } from "@testing-library/react";
 
 describe("Dashboard Test", () => {
   it("should have div with classname dashboard", () => {

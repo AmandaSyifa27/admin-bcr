@@ -1,9 +1,9 @@
 import React from "react";
-import { BrowserRouter } from "react-router-dom";
-import { render } from "@testing-library/react";
-import { configureStore } from "@reduxjs/toolkit";
 import rootReducer from "../store/features";
+import { BrowserRouter } from "react-router-dom";
+import { configureStore } from "@reduxjs/toolkit";
 import { Provider } from "react-redux";
+import { render } from "@testing-library/react";
 
 export default function renderWithProvider(
   children,

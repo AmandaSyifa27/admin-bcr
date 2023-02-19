@@ -1,5 +1,5 @@
-import axiosInstance from "../configs/axiosInstance";
 import Auth from "../utils/Auth";
+import axiosInstance from "../configs/axiosInstance";
 
 const APIAuth = {
   login: async ({ email, password }) => {

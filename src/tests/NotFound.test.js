@@ -1,7 +1,7 @@
-import { screen } from "@testing-library/react";
 import React from "react";
 import NotFoundPage from "../pages/NotFoundPage";
 import renderWithProvider from "../utils/testUtils";
+import { screen } from "@testing-library/react";
 
 describe("Not Found page test", () => {
   it("should render link element correctly", () => {

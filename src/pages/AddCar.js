@@ -1,10 +1,11 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import dashboardImg from "../assets/DashboardImg.png";
-import carsImg from "../assets/CarsImg.png";
-import "../styles/AddCar.css";
-import Header from "../components/Header";
 import AddCarForm from "../components/AddCarForm";
+import carsImg from "../assets/CarsImg.png";
+import dashboardImg from "../assets/DashboardImg.png";
+import Header from "../components/Header";
+import { Link } from "react-router-dom";
+import "../styles/AddCar.css";
+
 const AddCar = () => {
   return (
     <div className="addcar" role="addcar">

@@ -1,15 +1,15 @@
 import React, { useState } from "react";
-import { FormOutlined, DeleteOutlined, ReloadOutlined, LoadingOutlined } from "@ant-design/icons";
-import { Modal, ModalBody } from "react-bootstrap";
-import { Link, useLocation } from "react-router-dom";
-import { message, Button, Pagination } from "antd";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchSearchCars, searchPayloadSearchCars, setPayload, selectSearchCars } from "../store/features/searchCarSlicing";
 import APIOrder from "../apis/APIOrder";
 import carNotFound from "../assets/DeleteModal.png";
 import DeleteModal from "../assets/DeleteModal.png";
 import Category from "../assets/Category.png";
 import UpdateTime from "../assets/UpdateTime.png";
+import { FormOutlined, DeleteOutlined, ReloadOutlined, LoadingOutlined } from "@ant-design/icons";
+import { fetchSearchCars, searchPayloadSearchCars, setPayload, selectSearchCars } from "../store/features/searchCarSlicing";
+import { Link, useLocation } from "react-router-dom";
+import { Modal, ModalBody } from "react-bootstrap";
+import { message, Button, Pagination } from "antd";
+import { useDispatch, useSelector } from "react-redux";
 import "../styles/CarCards.css";
 import "../styles/DeleteButton.css";
 
@@ -108,11 +108,9 @@ const CarCards = () => {
   const [carIdForDelete, setCarIdForDelete] = useState("");
   const [messageApi, contextHolder] = message.useMessage();
   const dispatch = useDispatch();
-  const location = useLocation();
 
   const statePayloadSearchCars = useSelector(searchPayloadSearchCars);
   const stateSearchCars = useSelector(selectSearchCars);
-  const category = stateSearchCars.payload.category;
   const page = stateSearchCars.payload.page;
   const pageCount = stateSearchCars.data.pageCount;
 

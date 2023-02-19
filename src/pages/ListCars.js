@@ -1,12 +1,10 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import dashboardImg from "../assets/DashboardImg.png";
-import carsImg from "../assets/CarsImg.png";
-import "../styles/ListCars.css";
 import CarCards from "../components/CarCards";
+import carsImg from "../assets/CarsImg.png";
+import dashboardImg from "../assets/DashboardImg.png";
 import Header from "../components/Header";
-import Sidebar1 from "../components/Sidebar1.js";
-import Sidebar2 from "../components/Sidebar2.js";
+import { Link } from "react-router-dom";
+import "../styles/ListCars.css";
 
 const ListCars = () => {
   return (

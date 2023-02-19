@@ -1,17 +1,14 @@
 import React from "react";
-import { Link, useParams } from "react-router-dom";
-import dashboardImg from "../assets/DashboardImg.png";
 import carsImg from "../assets/CarsImg.png";
-import "../styles/AddCar.css";
-import Header from "../components/Header";
+import dashboardImg from "../assets/DashboardImg.png";
 import EditCarForm from "../components/EditCarForm.js";
-import APIOrder from "../apis/APIOrder.js";
+import Header from "../components/Header";
+import { Link } from "react-router-dom";
+import "../styles/AddCar.css";
 
 const EditCar = () => {
-  const params = useParams();
-
   return (
-    <div className="editcar d-flex flex-direction-row " role="editcar" style={{ background: "#f7f6fa" }}>
+    <div className="editcar d-flex flex-direction-row " data-testid="editcar-test" style={{ background: "#f7f6fa" }}>
       <div className="sidebar">
         <div className="sidebar-logo">
           <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
