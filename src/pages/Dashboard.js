@@ -1,16 +1,14 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
-import dashboardImg from "../assets/DashboardImg.png";
-import carsImg from "../assets/CarsImg.png";
-import "../styles/Dashboard.css";
-import { DatePicker } from "antd";
-import { BarElement, CategoryScale, Chart as ChartJs, Legend, LinearScale, Title, Tooltip } from "chart.js";
 import APIOrder from "../apis/APIOrder";
-import { Bar } from "react-chartjs-2";
-import OrdersTable from "../components/OrdersTable";
+import carsImg from "../assets/CarsImg.png";
+import dashboardImg from "../assets/DashboardImg.png";
 import Header from "../components/Header";
-import Sidebar1 from "../components/Sidebar1.js";
-import Sidebar2 from "../components/Sidebar2.js";
+import OrdersTable from "../components/OrdersTable";
+import { Bar } from "react-chartjs-2";
+import { BarElement, CategoryScale, Chart as ChartJs, Legend, LinearScale, Title, Tooltip } from "chart.js";
+import { DatePicker } from "antd";
+import { Link } from "react-router-dom";
+import "../styles/Dashboard.css";
 
 ChartJs.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend, Title);
 

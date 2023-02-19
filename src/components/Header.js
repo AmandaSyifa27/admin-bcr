@@ -1,4 +1,5 @@
 import React from "react";
+import Auth from "../utils/Auth";
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import { Form, Nav, DropdownButton, Dropdown } from "react-bootstrap";
@@ -7,8 +8,6 @@ import { SearchOutlined } from "@ant-design/icons";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { setPayload } from "../store/features/searchCarSlicing";
-import { ActClearedSearchCar } from "../redux/actions/Carlist";
-import Auth from "../utils/Auth";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -58,7 +57,7 @@ const Header = () => {
               className="admin-init d-flex"
               style={{ backgroundColor: "#CFD4ED", borderRadius: "50px", width: "38px", marginLeft: "24px" }}
             >
-              <bold style={{ margin: "auto", textAlign: "center" }}>A</bold>
+              <strong style={{ margin: "auto", textAlign: "center" }}>A</strong>
             </div>
             <DropdownButton id="dropdown-basic-button" title="Admin">
               <Dropdown.Item

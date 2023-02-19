@@ -1,12 +1,12 @@
 import React, { useState } from "react";
-import "../styles/SigninStyle.css";
-import { useLocation, useNavigate } from "react-router-dom";
 import APIAuth from "../apis/APIAuth";
-import { Alert } from "react-bootstrap";
 import Logo from "../assets/Logo.png";
-import { Input } from "antd";
+import { Alert } from "react-bootstrap";
 import { EyeInvisibleOutlined, EyeTwoTone } from "@ant-design/icons";
+import { Input } from "antd";
 import { message } from "antd";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../styles/SigninStyle.css";
 
 const SignIn = () => {
   const navigate = useNavigate();

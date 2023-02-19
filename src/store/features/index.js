@@ -1,5 +1,5 @@
-import { combineReducers } from "redux";
 import searchCars from "./searchCarSlicing.js";
+import { combineReducers } from "redux";
 
 const rootReducer = combineReducers({
   searchCars,

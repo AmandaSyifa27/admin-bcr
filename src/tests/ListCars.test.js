@@ -1,7 +1,7 @@
-import { screen } from "@testing-library/react";
 import React from "react";
 import ListCars from "../pages/ListCars";
 import renderWithProvider from "../utils/testUtils";
+import { screen } from "@testing-library/react";
 
 describe("List Cars test", () => {
   it("should have div element with classname listcars", () => {

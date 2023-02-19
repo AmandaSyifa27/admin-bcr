@@ -1,14 +1,13 @@
 import React from "react";
-import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
-import Dashboard from "../pages/Dashboard";
-import ListCars from "../pages/ListCars";
 import AddCar from "../pages/AddCar";
-import SignIn from "../pages/SignIn";
+import Dashboard from "../pages/Dashboard";
+import EditCar from "../pages/EditCar";
+import ListCars from "../pages/ListCars";
 import NotFoundPage from "../pages/NotFoundPage";
 import PrivateRoute from "./PrivateRoute";
 import ProtectedRoute from "./ProtectedRoute";
-import Dummy from "../components/Dummy";
-import EditCar from "../pages/EditCar";
+import SignIn from "../pages/SignIn";
+import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 
 function SetUpRouter() {
   return (
@@ -21,7 +20,6 @@ function SetUpRouter() {
           <Route index element={<Dashboard />} />
           <Route path="/list-cars" element={<ListCars />} />
           <Route path="/list-cars/add-car" element={<AddCar />} />
-          <Route path="/dummy" element={<Dummy />} />
           <Route path="/list-cars/edit-car/:carId" element={<EditCar />} />
         </Route>
         <Route path="*" element={<NotFoundPage />} />
