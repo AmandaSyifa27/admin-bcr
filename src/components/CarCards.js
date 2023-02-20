@@ -39,7 +39,7 @@ const Cards = ({ cars, filterByCategory, onDelete }) => {
     );
   if (status === "loading")
     return (
-      <div style={{ margin: "auto", textAlign: "center", color: "#0d28a6" }}>
+      <div style={{ margin: "auto", textAlign: "center", color: "#0d28a6", marginTop: "200px" }}>
         <LoadingOutlined />
         <em style={{ marginTop: "10px", display: "block" }}>Loading...</em>
       </div>

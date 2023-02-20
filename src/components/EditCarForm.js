@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import APIOrder from "../apis/APIOrder";
 import { convertToLocalTime } from "../components/CarCards.js";
+import { LoadingOutlined } from "@ant-design/icons";
 import { message } from "antd";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 
 const EditCarForm = () => {
   const [carData, setCarData] = useState();
@@ -62,12 +63,12 @@ const EditCarForm = () => {
   return (
     <>
       {contextHolder}
-      <div onSubmit={onSave} className="addcar-form" style={{ minHeight: "100vh" }}>
+      <div onSubmit={onSave} className="addcar-form">
         {carData ? (
-          <form>
+          <form style={{ display: "flex", justifyContent: "space-between", flexDirection: "column", height: "78vh" }}>
             <div className="inputs">
               <div className="input-name">
-                <label>Name/Tipe mobil*</label>
+                <label>Nama/Tipe mobil*</label>
                 <input defaultValue={name} required type="name" name="name" />
               </div>
               <div className="input-price">
@@ -95,16 +96,19 @@ const EditCarForm = () => {
                 <small>{convertToLocalTime(updatedAt)}</small>
               </div>
             </div>
-            <div className="add-button" style={{ marginTop: "31%" }}>
-              <button>Cancel</button>
+            <div className="add-button">
+              <Link to="/list-cars">
+                <button style={{ color: "#0D28A6", textDecoration: "none", background: "white" }}>Cancel</button>
+              </Link>
               <button type="submit">Save</button>
             </div>
           </form>
         ) : (
-          <p>Loading...</p>
+          <div style={{ margin: "auto", textAlign: "center", color: "#0d28a6", marginTop: "200px" }}>
+            <LoadingOutlined />
+            <em style={{ marginTop: "10px", display: "block" }}>Loading...</em>
+          </div>
         )}
-
-        <p></p>
       </div>
     </>
   );

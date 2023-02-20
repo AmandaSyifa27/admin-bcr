@@ -8,7 +8,12 @@ import "../styles/AddCar.css";
 
 const EditCar = () => {
   return (
-    <div className="editcar d-flex flex-direction-row " data-testid="editcar-test" style={{ background: "#f7f6fa" }}>
+    // <div
+    //   className="editcar d-flex flex-direction-row "
+    //   data-testid="editcar-test"
+    //   style={{ background: "#f7f6fa", minHeight: "100vh" }}
+    // >
+    <div className="addcar" role="addcar">
       <div className="sidebar">
         <div className="sidebar-logo">
           <svg width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
