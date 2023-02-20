@@ -40,7 +40,7 @@ const AddCarForm = () => {
         <form style={{ display: "flex", justifyContent: "space-between", flexDirection: "column", height: "78vh" }}>
           <div className="inputs">
             <div className="input-name">
-              <label>Name/Tipe mobil*</label>
+              <label>Nama/Tipe mobil*</label>
               <input required type="name" name="name" placeholder="Input Nama/Tipe Mobil" />
             </div>
             <div className="input-price">
@@ -68,7 +68,7 @@ const AddCarForm = () => {
               <small>{today()}</small>
             </div>
           </div>
-          <div className="add-button" style={{}}>
+          <div className="add-button">
             <Link to="/list-cars">
               <button style={{ color: "#0D28A6", textDecoration: "none", background: "white" }}>Cancel</button>
             </Link>
